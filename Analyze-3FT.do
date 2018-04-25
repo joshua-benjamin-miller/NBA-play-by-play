@@ -8,7 +8,7 @@ global datadir "data"
 
 use "$datadir\\FreeThrow.dta",replace
 sort tgameid
-by season,sort:summarize uniquegid
+*by season,sort:summarize uniquegid
 keep if outof==3 //keep only triples
 sort year month day playerteam tgameid timeremaining linenumber 
 
@@ -23,13 +23,16 @@ cap drop fg_last2
 sort sid uid linenumber
 by sid:gen fg_last2=(make[_n-1]+make[_n-2])/2 if number==3
 
+
 keep if fg_last2!=.
 
-collapse make, by(playerteam sid fg_last2)
+preserve
+	collapse make, by(playerteam sid fg_last2)
 
 
-xtset sid
-xtreg make fg_last2, fe 
+	xtset sid
+	xtreg make fg_last2, fe 
+restore
 
 *What about a paired t-test 0% vs. 100% on last 2
 

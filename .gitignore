@@ -4,3 +4,4 @@
 *.doc
 *.ppt
 *.lnk
+.ipynb_checkpoints
