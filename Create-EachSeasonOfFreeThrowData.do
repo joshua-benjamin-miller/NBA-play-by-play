@@ -8,7 +8,7 @@
 
 clear
 
-cd data
+global datadir "data"
 
 global files "playbyplay20052006" 
 global files "$files playbyplay20062007"
@@ -23,7 +23,7 @@ global files "$files playbyplay20112012"
 foreach file of global files{
 clear
 noi: di "Season " "`file'"
-insheet using "`file'.txt", tab
+insheet using "$datadir\\`file'.txt", tab
 
 
 *Drop Data that are not Free Throws
@@ -64,7 +64,7 @@ gen matchup=regexs(2) if regexm(gameid,"([0-9]+)([A-Z]+)")
 
 
 
-save "`file'.dta", replace
+save "$datadir\\`file'.dta", replace
 
 }
 

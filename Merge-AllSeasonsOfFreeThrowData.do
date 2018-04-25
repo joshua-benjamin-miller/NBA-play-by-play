@@ -7,8 +7,8 @@
 *Nshots
 
 clear
+global datadir "data"
 
-cd data
 
 global files "playbyplay20052006" 
 global files "$files playbyplay20062007"
@@ -21,7 +21,10 @@ global files "$files playbyplay20112012"
 
 *Append files together into one files
 foreach file of global files{
- append using `file'
+ *local 
+ disp "append $datadir\\`file'"
+ *disp $datadir\`file'
+ append using "$datadir\\`file'"
 }
 drop entry
 rename gameid tgameid
@@ -80,4 +83,4 @@ gen firstHalf=(gid<615)
 gen playerteam=player+team
 
 
-save FreeThrow.dta,replace
+save "$datadir\\FreeThrow.dta",replace

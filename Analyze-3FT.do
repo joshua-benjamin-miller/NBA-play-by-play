@@ -3,7 +3,10 @@
 
 
 clear
-use FreeThrow.dta,replace
+
+global datadir "data"
+
+use "$datadir\\FreeThrow.dta",replace
 sort tgameid
 by season,sort:summarize uniquegid
 keep if outof==3 //keep only triples
